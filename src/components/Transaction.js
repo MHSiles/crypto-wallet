@@ -18,6 +18,8 @@ const Transaction = () => {
 
     const createNewTransaction = (data) => {
 
+        // console.log(data);
+
         setTransaction([
             new TransactionData(
                     data.transaction_type,
@@ -35,6 +37,8 @@ const Transaction = () => {
                     data.time.unix_timestamp
                 )
         ]);
+
+        console.log(transaction[0].timestamp);
 
     }
 
@@ -69,8 +73,13 @@ const Transaction = () => {
     return (
         <div>
             <h1 style={{textAlign: "center"}}> Overview </h1>
-            <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}> You would swap <span style={{fontWeight: 'bold'}}>{transaction[0] && transaction[0].unix_timestamp}</span> for <span style={{fontWeight: 'bold'}}>{swap2}</span> on the {chain} </p>
-
+            {/* <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}> Transaction Type:  <span style={{fontWeight: 'bold'}}>{transaction[0] && transaction[0].type}</span> for <span style={{fontWeight: 'bold'}}>{swap2}</span> on the {chain} </p> */}
+            <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}>
+                Transaction Type: &nbsp;
+                <span style={{fontWeight: 'bold'}}>
+                    {transaction[0] && transaction[0].type}
+                </span>
+            </p>
             <div className="ui grid">
                 <div className="one wide column"></div>
                 <div className="seven wide column" style={boxStyling}>
