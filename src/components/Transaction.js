@@ -1,12 +1,9 @@
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import TransactionData from '../dataTypes/transactionData';
-import chaingrepConfig from '../services/chaingrep';
+// import chaingrepConfig from '../services/chaingrep';
 
 const Transaction = () => {
-    const swap1 = "0.1 ETH"
-    const swap2 = "100 USDC"
-    const chain = "Ethereum Mainnet"
     const contract = "Uniswap V3: Router 2"
     const description = "This is a description"
 
@@ -18,29 +15,9 @@ const Transaction = () => {
 
     const createNewTransaction = (data) => {
 
-        // console.log(data);
-
         setTransaction([
-            new TransactionData(
-                    data.transaction_type,
-                    data.from,
-                    data.fraud_detection.from.is_fraudulent,
-                    data.to,
-                    data.fraud_detection.to.is_fraudulent,
-                    data.transaction_metadata.asset.name,
-                    data.transaction_metadata.asset.symbol,
-                    data.transaction_metadata.amount.formatted,
-                    data.transaction_metadata.asset.logoURI,
-                    '',
-                    '',
-                    '',
-                    '',
-                    data.transaction_cost.paid.formatted,
-                    data.time.unix_timestamp
-                )
+            new TransactionData(data)
         ]);
-
-        console.log(transaction[0].timestamp);
 
     }
 
@@ -51,15 +28,13 @@ const Transaction = () => {
     const getTransactionInformation = () => {
 
         //This should be later obtained by another API
-        const data = JSON.stringify({
-            "from":"0xe126b3E5d052f1F575828f61fEBA4f4f2603652a",
-            "to":"0xf4d2888d29D722226FafA5d9B24F9164c092421E",
-            "value":"0",
-            "data":"0x095ea7b3000000000000000000000000881d40237659c251811cec9c364ef91dc08d300c0000000000000000000000000000000000000000000000000000000000000000",
-            "gasLimit":"1000000"   
-        });
-
-        createNewTransaction(apiResponse);
+        // const data = JSON.stringify({
+        //     "from":"0xe126b3E5d052f1F575828f61fEBA4f4f2603652a",
+        //     "to":"0xf4d2888d29D722226FafA5d9B24F9164c092421E",
+        //     "value":"0",
+        //     "data":"0x095ea7b3000000000000000000000000881d40237659c251811cec9c364ef91dc08d300c0000000000000000000000000000000000000000000000000000000000000000",
+        //     "gasLimit":"1000000"   
+        // });
 
         // axios(chaingrepConfig(data))
         //     .then(function (response) {
@@ -69,107 +44,113 @@ const Transaction = () => {
         //     .catch(function (error) {
         //         console.log(error);
         //     });
-
+                
+        createNewTransaction(apiResponse);
     }
 
     return (
         <div>
-            <h1 style={{textAlign: "center"}}> Overview </h1>
-            {/* <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}> Transaction Type:  <span style={{fontWeight: 'bold'}}>{transaction[0] && transaction[0].type}</span> for <span style={{fontWeight: 'bold'}}>{swap2}</span> on the {chain} </p> */}
-            <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}>
-                Transaction Type: &nbsp;
-                <span style={{fontWeight: 'bold'}}>
-                    {transaction[0] && transaction[0].type}
-                </span>
-            </p>
-            <div className="ui grid">
-                <div className="one wide column"></div>
-                <div className="seven wide column" style={boxStyling}>
-                    <h3 style={{textAlign: "center"}}>What will happen in your wallet:</h3>
+            {
+                transaction[0]
+                ? (
+                    <div>
+                        <h1 style={{textAlign: "center"}}> Overview </h1>
+                        <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}>
+                            Transaction Type: &nbsp;
+                            <span style={{fontWeight: 'bold'}}>
+                                {transaction[0].type}
+                            </span>
+                        </p>
+                        <div className="ui grid">
+                            <div className="one wide column"></div>
+                            <div className="seven wide column" style={boxStyling}>
+                                <h3 style={{textAlign: "center"}}>What will happen in your wallet:</h3>
 
-                    <table className="ui fixed table">
-                        <thead>
-                            <tr>
-                            <th>Assets Out/In</th>
-                            <th>Token</th>
-                            <th>Amount (USD/Token)</th>
-                            <th>Purpose</th>
-                            <th>To</th>
-                            </tr>
-                        </thead>
-                    </table>
+                                <table className="ui fixed table">
+                                    <thead>
+                                        <tr>
+                                        <th>Assets Out/In</th>
+                                        <th>Token</th>
+                                        <th>Amount (USD/Token)</th>
+                                        <th>Purpose</th>
+                                        <th>To</th>
+                                        </tr>
+                                    </thead>
+                                </table>
 
-                    <table className="ui fixed table">
-                        {false && <tbody>
-                            <tr>
-                            <td>transaction[0].inputCryptoAmount</td>
-                            <td>ETH</td>
-                            <td>$100/0.1</td>
-                            <td>Swap</td>
-                            <td>383r83jilsj8dsklfjsaielfjgaiselfjklasehgkusaeghukaesht4osjtj8ostj484osjt8osj</td>
-                            </tr>
-                        </tbody> }
-                        <tbody>
-                            <tr>
-                            <td>Out</td>
-                            <td>{transaction[0].inputCryptoSymbol}</td>
-                            <td>${transaction[0].gasAmount}</td>
-                            <td>Gas</td>
-                            <td>{transaction[0].to}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <table className="ui fixed table">
+                                    {false && <tbody>
+                                        <tr>
+                                        <td>transaction[0].inputCryptoAmount</td>
+                                        <td>ETH</td>
+                                        <td>$100/0.1</td>
+                                        <td>Swap</td>
+                                        <td>383r83jilsj8dsklfjsaielfjgaiselfjklasehgkusaeghukaesht4osjtj8ostj484osjt8osj</td>
+                                        </tr>
+                                    </tbody> }
+                                    <tbody>
+                                        <tr>
+                                        <td>Out</td>
+                                        <td>{transaction[0].inputCryptoSymbol}</td>
+                                        <td>${transaction[0].gasAmount}</td>
+                                        <td>Gas</td>
+                                        <td>{transaction[0].to}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                    {false && <table className="ui fixed table">
-                    <tbody>
-                            <tr>
-                            <td>In</td>
-                            <td>USDC</td>
-                            <td>$100/100</td>
-                            <td>Swap</td>
-                            <td>0xfi3jieljf3</td>
-                            </tr>
-                        </tbody>
-                    </table> }
-                </div>
+                                {false && <table className="ui fixed table">
+                                <tbody>
+                                        <tr>
+                                        <td>In</td>
+                                        <td>USDC</td>
+                                        <td>$100/100</td>
+                                        <td>Swap</td>
+                                        <td>0xfi3jieljf3</td>
+                                        </tr>
+                                    </tbody>
+                                </table> }
+                            </div>
 
-                <div className="seven wide column" style={boxStyling}>
-                    <h3 style={{textAlign: "center"}}>What contract you are interacting with:</h3>
-                    <h4>Contract: {contract}</h4>
-                    <h6>Description: {description}</h6>
-                    <table className="ui fixed table" >
-                        <thead>
-                            <tr>
-                            <th>Function Calls</th>
-                            <th>Contract Calls</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>fc1</td>
-                            <td>All time: cc1</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                            <td>fc2</td>
-                            <td>Avg per day: cc2</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                            <td>fc1</td>
-                            <td>Last hour: cc3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            <div className="seven wide column" style={boxStyling}>
+                                <h3 style={{textAlign: "center"}}>What contract you are interacting with:</h3>
+                                <h4>Contract: {contract}</h4>
+                                <h6>Description: {description}</h6>
+                                <table className="ui fixed table" >
+                                    <thead>
+                                        <tr>
+                                        <th>Function Calls</th>
+                                        <th>Contract Calls</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td>fc1</td>
+                                        <td>All time: cc1</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                        <td>fc2</td>
+                                        <td>Avg per day: cc2</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                        <td>fc1</td>
+                                        <td>Last hour: cc3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <div style={{display: "flex",  justifyContent: "center", marginTop: "2%"}}><button className="ui pink button">Back to Uniswap</button></div>
+                        <div style={{display: "flex",  justifyContent: "center", marginTop: "2%"}}><button className="ui pink button">Back to Uniswap</button></div>
+                    </div>
+                ) : ''
+            }
         </div>
     )
-
 }
 
 export default Transaction;
