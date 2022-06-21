@@ -1,16 +1,15 @@
 import Transaction from "./Transaction";
 
-
 const App = () => {
 
     return (
         <div>
             <div className="ui message">
-                <h1 className="header" style={{marginLeft: "0px"}}>
-                Atomic Crypto Wallet
+                <h1 className="header" style={{display:"flex",justifyContent:"right"}}>
+                chain/balance/address buttons here
                 </h1>
-                <Transaction/>
             </div>
+            <Transaction/>
         </div>
     )
 
