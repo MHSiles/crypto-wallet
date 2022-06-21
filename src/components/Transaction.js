@@ -1,4 +1,7 @@
-
+import {useState} from 'react';
+import axios from 'axios';
+import TransactionData from '../dataTypes/transactionData';
+import chaingrepConfig from '../services/chaingrep';
 
 const Transaction = () => {
     const swap1 = "0.1 ETH"
@@ -9,7 +12,60 @@ const Transaction = () => {
 
     const boxStyling = {border: "solid 1px black", borderRadius: "10px", minHeight: "400px", margin:"5px"};
 
+    const [transaction, setTransaction] = useState([]);
+
+    const createNewTransaction = (data) => {
+
+        console.log(data.transaction_type);
+
+        setTransaction([
+            new TransactionData(
+                    data.transaction_type,
+                    data.from,
+                    data.fraud_detection.from.is_fraudulent,
+                    data.to,
+                    data.fraud_detection.to.is_fraudulent,
+                    data.transaction_metadata.asset.name,
+                    data.transaction_metadata.amount.formatted,
+                    data.transaction_metadata.asset.logoURI,
+                    '',
+                    '',
+                    '',
+                    data.transaction_cost.paid.formatted,
+                    data.time.unix_timestamp
+                )
+        ]);
+
+    }
+
+    const getTransactionInformation = () => {
+
+        //This should be later obtained by another API
+        const data = JSON.stringify({
+            "from":"0xe126b3E5d052f1F575828f61fEBA4f4f2603652a",
+            "to":"0xf4d2888d29D722226FafA5d9B24F9164c092421E",
+            "value":"0",
+            "data":"0x095ea7b3000000000000000000000000881d40237659c251811cec9c364ef91dc08d300c0000000000000000000000000000000000000000000000000000000000000000",
+            "gasLimit":"1000000"   
+        });
+
+        axios(chaingrepConfig(data))
+            .then(function (response) {
+                console.log(JSON.stringify(response.data.response));
+                createNewTransaction(response.data.response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+
     return (
+        // <div className='ui grid'>
+        //         <div className="sixteen wide column">
+        //             <div className="ui orange bottom attached button" tabIndex="0"  onClick={getTransactionInformation}>Get Transaction Information</div>
+        //         </div>
+        //     </div>
         <div>
             <h1 style={{textAlign: "center"}}> Overview </h1>
             <p style={{textAlign: "center", fontSize: "25px", marginLeft: "30%", marginRight: "30%"}}> You would swap <span style={{fontWeight: 'bold'}}>{swap1}</span> for <span style={{fontWeight: 'bold'}}>{swap2}</span> on the {chain} </p>
