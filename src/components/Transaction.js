@@ -28,8 +28,10 @@ const Transaction = () => {
                     data.to,
                     data.fraud_detection.to.is_fraudulent,
                     data.transaction_metadata.asset.name,
+                    data.transaction_metadata.asset.symbol,
                     data.transaction_metadata.amount.formatted,
                     data.transaction_metadata.asset.logoURI,
+                    '',
                     '',
                     '',
                     '',
@@ -98,19 +100,28 @@ const Transaction = () => {
                     </table>
 
                     <table className="ui fixed table">
-                        <tbody>
+                        {false && <tbody>
                             <tr>
-                            <td>Out</td>
+                            <td>transaction[0].inputCryptoAmount</td>
                             <td>ETH</td>
                             <td>$100/0.1</td>
                             <td>Swap</td>
                             <td>383r83jilsj8dsklfjsaielfjgaiselfjklasehgkusaeghukaesht4osjtj8ostj484osjt8osj</td>
                             </tr>
+                        </tbody> }
+                        <tbody>
+                            <tr>
+                            <td>Out</td>
+                            <td>{transaction[0].inputCryptoSymbol}</td>
+                            <td>${transaction[0].gasAmount}</td>
+                            <td>Gas</td>
+                            <td>{transaction[0].to}</td>
+                            </tr>
                         </tbody>
                     </table>
 
-                    <table className="ui fixed table">
-                        <tbody>
+                    {false && <table className="ui fixed table">
+                    <tbody>
                             <tr>
                             <td>In</td>
                             <td>USDC</td>
@@ -119,7 +130,7 @@ const Transaction = () => {
                             <td>0xfi3jieljf3</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> }
                 </div>
 
                 <div className="seven wide column" style={boxStyling}>

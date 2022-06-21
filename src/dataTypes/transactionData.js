@@ -5,10 +5,12 @@ class TransactionData {
         fromFraudDetection,
         to,  
         toFraudDetection,
-        inputCryptoCurrencyName,
+        inputCryptoName,
+        inputCryptoSymbol,
         inputCryptoAmount,
         inputCryptoLogo,
-        outputCryptoCurrency,
+        outputCryptoName,
+        outputCryptoSymbol,
         outputCryptoAmount,
         outputCryptoLogo,
         gasAmount,
@@ -19,10 +21,12 @@ class TransactionData {
       this.fromFraudDetection = fromFraudDetection;
       this.to = to;
       this.toFraudDetection = toFraudDetection;
-      this.inputCryptoCurrencyName = inputCryptoCurrencyName;
+      this.inputCryptoName = inputCryptoName;
+      this.inputCryptoSymbol = inputCryptoSymbol;
       this.inputCryptoAmount = inputCryptoAmount;
       this.inputCryptoLogo = inputCryptoLogo;
-      this.outputCryptoCurrency = outputCryptoCurrency;
+      this.outputCryptoName = outputCryptoName;
+      this.outputCryptoSymbol = outputCryptoSymbol;
       this.outputCryptoAmount = outputCryptoAmount;
       this.outputCryptoLogo = outputCryptoLogo;
       this.gasAmount = gasAmount;
