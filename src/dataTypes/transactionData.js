@@ -2,7 +2,7 @@ class TransactionData {
     constructor(
         data
     ) {
-      this.type = data.transaction_type;
+      this.type = data.response.transaction_type;
       this.you = data.response.transaction_metadata.swappedFrom.asset.address;
       this.to = data.response.transaction_metadata.swappedTo.asset.address;
       this.inputCryptoName =  data.response.transaction_metadata.swappedFrom.asset.name;
