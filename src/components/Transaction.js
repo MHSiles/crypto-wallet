@@ -135,7 +135,7 @@ const Transaction = () => {
     }
 
 
-    const boxStyling = {border: "solid 1px black", borderRadius: "10px", minHeight: "400px", margin:"5px"};
+    const boxStyling = {border: "solid 1px black", borderRadius: "10px", minHeight: "400px", margin:"5px", backgroundColor:"white", color:"black"};
 
     const [transaction, setTransaction] = useState([]);
 
