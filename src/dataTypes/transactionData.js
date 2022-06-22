@@ -13,6 +13,7 @@ class TransactionData {
       this.outputCryptoSymbol = data.response.transaction_metadata.swappedTo.asset.symbol;
       this.outputCryptoAmount = data.response.transaction_metadata.swappedTo.amount.formatted;
       this.outputCryptoLogo = data.response.transaction_metadata.swappedTo.asset.logoURI;
+      this.gasUnit = data.response.transaction_cost.gas_price.unit;
       this.gasAmount = data.response.transaction_cost.paid.formatted;
       this.timestamp = data.response.time.unix_timestamp;
   

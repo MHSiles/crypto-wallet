@@ -186,8 +186,8 @@ const Transaction = () => {
                             </span>
                         </p>
                         <div className="ui grid">
-                            <div className="one wide column"></div>
-                            <div className="seven wide column" style={boxStyling}>
+                            <div className="four wide column"></div> {/*  change to one wide after  */}
+                            <div className="eight wide column" style={boxStyling}> {/*  change to seven wide after  */}
                                 <h3 style={{textAlign: "center"}}>What will happen in your wallet:</h3>
 
                                 <table className="ui fixed table">
@@ -207,16 +207,16 @@ const Transaction = () => {
                                         <tr>
                                         <td>Out</td>
                                         <td>{transaction[0].inputCryptoSymbol}</td>
-                                        <td>{transaction[0].inputCryptoAmount}</td>
+                                        <td>{parseFloat(transaction[0].inputCryptoAmount).toFixed(2)}</td> 
                                         <td>Swap</td>
-                                        <td>{transaction[0].to}</td>
+                                        <td>{transaction[0].to.slice(0,5)}...{transaction[0].to.slice(37,42)}</td>
                                         </tr>
                                     </tbody> 
                                     <tbody>
                                         <tr>
                                         <td>Out</td>
-                                        <td>ETH</td>
-                                        <td>{transaction[0].gasAmount}</td>
+                                        <td>{transaction[0].gasUnit == "gwei" ? 'ETH' : transaction[0].gasUnit}</td>
+                                        <td>{parseFloat(transaction[0].gasAmount).toFixed(8)}</td>
                                         <td>Gas</td>
                                         <td>Miners</td>
                                         </tr>
@@ -228,9 +228,9 @@ const Transaction = () => {
                                         <tr>
                                         <td>In</td>
                                         <td>{transaction[0].outputCryptoSymbol}</td>
-                                        <td>{transaction[0].outputCryptoAmount}</td>
+                                        <td>{parseFloat(transaction[0].outputCryptoAmount).toFixed(8)}</td>
                                         <td>Swap</td>
-                                        <td>{transaction[0].you}</td>
+                                        <td>{transaction[0].you.slice(0,5)}...{transaction[0].you.slice(37,42)}</td>
                                         </tr>
                                     </tbody>
                                 </table> }
