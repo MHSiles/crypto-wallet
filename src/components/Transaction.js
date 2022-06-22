@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 // import axios from 'axios';
 import TransactionData from '../dataTypes/transactionData';
 // import chaingrepConfig from '../services/chaingrep';
+import { Link } from 'react-router-dom'
+
 
 const Transaction = () => {
     const contract = "Uniswap V3: Router 2"
@@ -269,7 +271,7 @@ const Transaction = () => {
                             </div> */}
                         </div>
 
-                        <div style={{display: "flex",  justifyContent: "center", marginTop: "2%"}}><button className="ui pink button">Back to Uniswap</button></div>
+                        <div style={{display: "flex",  justifyContent: "center", marginTop: "2%"}}><button className="ui pink button" onClick = {() => window.close()}>Back to Uniswap</button></div>
                     </div>
                 ) : ''
             }
